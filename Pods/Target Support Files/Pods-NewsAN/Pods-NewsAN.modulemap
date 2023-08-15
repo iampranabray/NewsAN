@@ -1,0 +1,6 @@
+framework module Pods_NewsAN {
+  umbrella header "Pods-NewsAN-umbrella.h"
+
+  export *
+  module * { export * }
+}

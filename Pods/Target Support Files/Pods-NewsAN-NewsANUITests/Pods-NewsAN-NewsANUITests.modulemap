@@ -1,0 +1,6 @@
+framework module Pods_NewsAN_NewsANUITests {
+  umbrella header "Pods-NewsAN-NewsANUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
