@@ -7,7 +7,26 @@
 
 import Foundation
 import SwiftUI
+import Combine
+import Firebase
+import FirebaseFirestore
 import CoreLocation
+
+
+
+struct NotificationsModelFirebase:Identifiable, Codable {
+    //var id: String
+    
+    let title: String
+    let urlLink : String
+    let id: Timestamp
+    //var isFeatured: Bool
+    var image: Image {
+        Image(systemName: "newspaper.circle.fill")
+        
+    }
+    
+}
 
 struct NotificationsModel: Hashable, Codable, Identifiable {
     var id: Int
@@ -28,7 +47,7 @@ struct NotificationsModel: Hashable, Codable, Identifiable {
     private var imageName: String
     var image: Image {
         Image(systemName: "newspaper.circle.fill")
-          
+
     }
     var featureImage: Image? {
         isFeatured ? Image(imageName + "_feature") : nil

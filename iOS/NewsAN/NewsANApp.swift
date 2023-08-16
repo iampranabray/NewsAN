@@ -16,7 +16,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
 //        let db = Firestore.firestore()
-//        let citiesRef = db.collection("news")
+//        let citiesRef = db.collection("notifications")
 //        //
 //        let customTimestamp1 = Timestamp(seconds: 1691865317, nanoseconds: 0)
 //        let customTimestamp2 = Timestamp(seconds: 1691778917, nanoseconds: 0)
@@ -33,7 +33,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //
 //        citiesRef.document("12-08-2023").setData([
 //            "name": "DT",
+//            "title": "12 Aug 2023 DT news",
 //            "author": "dt.andaman.gov.in",
+//            "showFavoritesOnly": false,
 //            "id": 1001,
 //            "url": "https://dt.andaman.gov.in/epaper/128202392125539.pdf",
 //            "urlToImage": "https://c.biztoc.com/p/1ff58033162e4633/s.webp",
@@ -41,6 +43,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //        ])
 //        citiesRef.document("11-08-2023").setData([
 //            "name": "DT",
+//            "title": "11 Aug 2023 DT news",
+//            "showFavoritesOnly": false,
 //            "author": "dt.andaman.gov.in",
 //            "id": 1002,
 //            "url": "https://dt.andaman.gov.in/epaper/118202393435848.pdf",
@@ -49,6 +53,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //        ])
 //        citiesRef.document("10-08-2023").setData([
 //            "name": "DT",
+//            "title": "10 Aug 2023 DT news",
+//            "showFavoritesOnly": false,
 //            "author": "dt.andaman.gov.in",
 //            "id": 1003,
 //            "url": "https://dt.andaman.gov.in/epaper/108202392530409.pdf",
@@ -58,6 +64,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //        citiesRef.document("09-08-2023").setData([
 //            "name": "DT",
 //            "author": "dt.andaman.gov.in",
+//            "showFavoritesOnly": false,
+//            "title": "09 Aug 2023 DT news",
 //            "id": 1004,
 //            "url": "https://dt.andaman.gov.in/epaper/98202392253881.pdf",
 //            "urlToImage": "https://c.biztoc.com/p/1ff58033162e4633/s.webp",
@@ -65,6 +73,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //        ])
 //        citiesRef.document("08-08-2023").setData([
 //            "name": "DT",
+//            "title": "08 Aug 2023 DT news",
+//            "showFavoritesOnly": false,
 //            "author": "dt.andaman.gov.in",
 //            "id": 1005,
 //            "url": "https://dt.andaman.gov.in/epaper/88202392033945.pdf",
@@ -73,6 +83,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //        ])
 //        citiesRef.document("07-08-2023").setData([
 //            "name": "DT",
+//            "title": "07 Aug 2023 DT news",
+//            "showFavoritesOnly": false,
 //            "author": "dt.andaman.gov.in",
 //            "id": 1006,
 //            "url": "https://dt.andaman.gov.in/epaper/78202391622382.pdf",
@@ -81,6 +93,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //        ])
 //        citiesRef.document("06-08-2023").setData([
 //            "name": "DT",
+//            "title": "06 Aug 2023 DT news",
+//            "showFavoritesOnly": false,
 //            "author": "dt.andaman.gov.in",
 //            "id": 1007,
 //            "url": "https://dt.andaman.gov.in/epaper/682023103753204.pdf",
@@ -89,6 +103,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //        ])
 //        citiesRef.document("05-08-2023").setData([
 //            "name": "DT",
+//            "title": "05 Aug 2023 DT news",
+//            "showFavoritesOnly": false,
 //            "author": "dt.andaman.gov.in",
 //            "id": 1008,
 //            "url": "https://dt.andaman.gov.in/epaper/118202393435848.pdf",
@@ -97,6 +113,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //        ])
 //        citiesRef.document("04-08-2023").setData([
 //            "name": "DT",
+//            "title": "04 Aug 2023 DT news",
+//            "showFavoritesOnly": false,
 //            "author": "dt.andaman.gov.in",
 //            "id": 1009,
 //            "url": "https://dt.andaman.gov.in/epaper/118202393435848.pdf",
@@ -105,6 +123,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 //        ])
 //        citiesRef.document("03-08-2023").setData([
 //            "name": "DT",
+//            "title": "03 Aug 2023 DT news",
+//            "showFavoritesOnly": false,
 //            "author": "dt.andaman.gov.in",
 //            "id": 1010,
 //            "url": "https://dt.andaman.gov.in/epaper/118202393435848.pdf",

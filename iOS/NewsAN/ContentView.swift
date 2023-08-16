@@ -27,6 +27,7 @@ struct ContentView: View {
                         switch selectedTab {
                         case .homePage:
                             CategoryHome()
+                           
                         case .calander:
                             CalendarView()
                         case .notifications:

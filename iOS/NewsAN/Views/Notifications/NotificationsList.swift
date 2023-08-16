@@ -8,46 +8,68 @@
 import SwiftUI
 
 struct NotificationsList: View {
-    @EnvironmentObject var modelData: ModelData
+    
     @State private var showFavoritesOnly = false
-
-    var filteredLandmarks: [NotificationsModel] {
+    @StateObject var viewModel = NotificationsViewModel()
+    @ObservedObject private var favoriteItemsManager = FavoriteItemsManager.shared
+    
+    
+    var filteredLandmarks: [NotificationsModelFirebase] {
         
-        modelData.notifications.filter { landmark in
-            (!showFavoritesOnly || landmark.isFavorite)
+        
+        viewModel.notificationModel.filter { landmark in
+            
+            
+            //(!showFavoritesOnly || landmark.isFavorite)
+            
+            
+            
+            if showFavoritesOnly{
+                return (favoriteItemsManager.favoriteItemIDs.contains(landmark.id))
+            }else{
+                return (favoriteItemsManager.favoriteItemIDs.contains(landmark.id) || !(favoriteItemsManager.favoriteItemIDs.contains(landmark.id)))
+            }
+            
+            
+            
         }
     }
-
+    
     var body: some View {
         NavigationView {
             List {
                 Toggle(isOn: $showFavoritesOnly) {
                     Text("Favorites only")
                 }
-
-                ForEach(filteredLandmarks) { landmark in
+                
+                ForEach(filteredLandmarks, id: \.id) { notificationRecord in
                     NavigationLink {
-                        NotificationsDetail(notifications: landmark)
+                        //NotificationsDetail(notifications: notificationRecord)
+                        NewsContentView(urlLink: notificationRecord.urlLink ).navigationTitle("News")
+                            .navigationBarTitleDisplayMode(.inline)
                     } label: {
-                        NotificationsRow(notifications: landmark)
+                        NotificationsRow(notifications: notificationRecord)
                         
                     }
                     
                 }
             }
-           
+            
             .navigationTitle("Notifications")
             
-           
+            
+        }
+        .onAppear{
+            self.viewModel.readDataFromFirestore()
         }
         .dynamicTypeSize(.large ... .xxLarge)
-            .navigationViewStyle(.stack)
+        .navigationViewStyle(.stack)
     }
 }
 
 struct Notifications_Previews: PreviewProvider {
     static var previews: some View {
         NotificationsList()
-            .environmentObject(ModelData())
+        
     }
 }
