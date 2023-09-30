@@ -75,5 +75,6 @@ dependencies {
     implementation ("androidx.navigation:navigation-compose:2.5.3")
 
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
     //implementation ("com.github.barteksc:android-pdf-viewer:2.8.2")
 }

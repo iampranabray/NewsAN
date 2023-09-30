@@ -1,6 +1,5 @@
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
@@ -15,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
@@ -22,16 +22,35 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.anNews.ui.theme.PRTheme
 
 
 @Composable
 fun SettingsDialog(
     onDismiss: () -> Unit,
-    //viewModel: MainActivityViewModel = hiltViewModel()
+    viewModel: SettingViewModel = hiltViewModel()
 ) {
 
 
+    val settingsUiState by viewModel.settingsUiState.collectAsStateWithLifecycle()
+    SettingsDialog(
+        settingsUiState = settingsUiState,
+        onChangeThemeBrand = viewModel::updateThemeBrand,
+        onChangeDarkThemeConfig = viewModel::updateDarkThemeConfig,
+        onDismiss = onDismiss
+    )
+
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+private fun SettingsDialog(
+    settingsUiState: SettingUiState,
+    onChangeThemeBrand: (themeBrand: ThemeBrand) -> Unit,
+    onChangeDarkThemeConfig: (darkThemeConfig: DarkThemeConfig) -> Unit,
+    onDismiss: () -> Unit
+) {
     val configuration = LocalConfiguration.current
     AlertDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false),
@@ -49,10 +68,24 @@ fun SettingsDialog(
 
             Divider()
             Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                SettingsPanel(
-                    onChangeThemeBrand =  {}
-                    //viewModel::
-                )
+                when (settingsUiState) {
+                    SettingUiState.Loading -> {
+                        Text(text = "Loading..")
+                    }
+
+                    is SettingUiState.Success -> {
+                        SettingsPanel(
+                            onChangeThemeBrand = onChangeThemeBrand,
+                            onChangeDarkThemeConfig = onChangeDarkThemeConfig,
+                            settings = settingsUiState.settings
+                            //viewModel::
+                        )
+                    }
+
+
+                    else -> {}
+                }
+
             }
 
 
@@ -70,12 +103,17 @@ fun SettingsDialog(
 
         }
     )
+
 }
 
 @Composable
 private fun SettingsPanel(
-    onChangeThemeBrand: ()->Unit
+    onChangeThemeBrand: (themeBrand: ThemeBrand) -> Unit,
+    onChangeDarkThemeConfig: (darkThemeConfig: DarkThemeConfig) -> Unit,
+    settings: UserEditableSettings
+    //UserEditableSettings
 ) {
+
     var selectedOption by rememberSaveable {
         mutableStateOf<ThemeBrand>(ThemeBrand.DEFAULT)
     }
@@ -95,14 +133,18 @@ private fun SettingsPanel(
 
         RadioButtonOption(
             text = "Default",
-            isSelected = ThemeBrand.DEFAULT == selectedOption,
-            onOptionSelected = { selectedOption = ThemeBrand.DEFAULT })
+            isSelected = settings.brand == ThemeBrand.DEFAULT,
+            onOptionSelected = {
+                onChangeThemeBrand(ThemeBrand.DEFAULT)
+                // selectedOption = ThemeBrand.DEFAULT
+            })
 
         RadioButtonOption(
             text = "Android",
-            isSelected = ThemeBrand.ANDROID == selectedOption,
+            isSelected = settings.brand == ThemeBrand.ANDROID,
             onOptionSelected = {
-                selectedOption = ThemeBrand.ANDROID
+                onChangeThemeBrand(ThemeBrand.ANDROID)
+                //selectedOption = ThemeBrand.ANDROID
                 //viewModel.changeTheme()
             })
 
@@ -121,15 +163,17 @@ private fun SettingsPanel(
     ) {
         RadioButtonOption(
             text = "Yes",
-            isSelected = ThemeBrand.ANDROID == selectedOption,
+            isSelected = ThemeBrand.ANDROID == settings.brand,
             onOptionSelected = {
+                onChangeThemeBrand(ThemeBrand.ANDROID)
                 selectedOption = ThemeBrand.ANDROID
                 //viewModel.changeTheme()
             })
         RadioButtonOption(
             text = "No",
-            isSelected = ThemeBrand.ANDROID == selectedOption,
+            isSelected = ThemeBrand.ANDROID == settings.brand,
             onOptionSelected = {
+                onChangeThemeBrand(ThemeBrand.ANDROID)
                 selectedOption = ThemeBrand.ANDROID
                 //viewModel.changeTheme()
             })
@@ -145,23 +189,27 @@ private fun SettingsPanel(
     ) {
         RadioButtonOption(
             text = "System Default",
-            isSelected = DarkThemeConfig.FOLLOW_SYSTEM == darkThemeConfig,
+            isSelected = DarkThemeConfig.FOLLOW_SYSTEM == settings.darkThemeConfig,
             onOptionSelected = {
-                darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM
+                onChangeDarkThemeConfig(DarkThemeConfig.FOLLOW_SYSTEM)
+                //darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM
                 //viewModel.changeTheme()
             })
         RadioButtonOption(
             text = "Light",
-            isSelected = DarkThemeConfig.LIGHT == darkThemeConfig,
+            isSelected = DarkThemeConfig.LIGHT == settings.darkThemeConfig,
             onOptionSelected = {
-                darkThemeConfig = DarkThemeConfig.LIGHT
+                onChangeDarkThemeConfig(DarkThemeConfig.LIGHT)
+                //darkThemeConfig = DarkThemeConfig.LIGHT
                 //viewModel.changeTheme()
             })
         RadioButtonOption(
             text = "Dark",
-            isSelected = DarkThemeConfig.DARK == darkThemeConfig,
+            isSelected = DarkThemeConfig.DARK == settings.darkThemeConfig,
             onOptionSelected = {
-                darkThemeConfig = DarkThemeConfig.DARK
+
+                onChangeDarkThemeConfig(DarkThemeConfig.DARK)
+                //darkThemeConfig = DarkThemeConfig.DARK
 
                 //viewModel.changeThemeByStateFlow()
             })

@@ -1,4 +1,4 @@
-import android.service.autofill.UserData
+
 import kotlinx.coroutines.flow.Flow
 
 interface UserDataRepository{
@@ -12,4 +12,15 @@ interface UserDataRepository{
      * Sets the desired dark theme config.
      */
     suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig)
+    suspend fun setDynamicColorPreference(useDynamicColor: Boolean)
 }
+
+data class UserData(
+    val bookmarkedNewsResources: Set<String>,
+    val viewedNewsResources: Set<String>,
+    val followedTopics: Set<String>,
+    val themeBrand: ThemeBrand,
+    val darkThemeConfig: DarkThemeConfig,
+    val useDynamicColor: Boolean,
+    val shouldHideOnboarding: Boolean,
+)

@@ -1,9 +1,9 @@
+
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
@@ -42,6 +42,14 @@ fun MasterPage(modifier: Modifier = Modifier) {
         mutableStateOf(false)
     }
 
+//    var settingViewModel = viewModel<SettingViewModel>(
+//        factory = object : ViewModelProvider.Factory {
+//            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//                return SettingViewModel(userDataRepository = ) as T
+//            }
+//        }
+//    );
+
     NiaBackground {
         PRGradientBackground(
             gradientColors = if (true) {
@@ -52,7 +60,10 @@ fun MasterPage(modifier: Modifier = Modifier) {
         ) {
             if (showSettingsDialog) {
                 SettingsDialog(
-                    onDismiss = { showSettingsDialog = false })
+                    onDismiss = {
+                       // showSettingsDialog = false
+                    }
+                )
             }
             Scaffold(
 
@@ -64,7 +75,8 @@ fun MasterPage(modifier: Modifier = Modifier) {
                 bottomBar = {
                     BottomAppBar {
                         BottomItems().bottomItems.forEachIndexed { index, bottomNavItem ->
-                            NavigationBarItem(selected = selectedItem.value == bottomNavItem.name,
+                            NavigationBarItem(
+                                selected = selectedItem.value == bottomNavItem.name,
                                 icon = {
                                     Icon(
                                         imageVector = bottomNavItem.icon,
