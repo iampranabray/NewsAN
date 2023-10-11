@@ -20,24 +20,6 @@ import androidx.compose.ui.unit.dp
 fun HomePage(onHome: () -> Unit, name: String, modifier: Modifier = Modifier) {
 
     HostState()
-//    var showSettingsDialog by rememberSaveable {
-//        mutableStateOf(false)
-//    }
-//
-//     val viewModel = viewModel<MainActivityViewModel>()
-//    if (showSettingsDialog) {
-//        com.djupbyte.newsan.features.SettingsDialog(
-//            onDismiss = { showSettingsDialog = false })
-//    }
-
-//    Column(
-//        modifier = Modifier.fillMaxSize(),
-//    ) {
-//
-//
-//        HostState()
-//
-//    }
 
 
 }

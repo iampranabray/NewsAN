@@ -21,10 +21,11 @@ import androidx.compose.ui.unit.dp
 fun Cart(onHome: () -> Unit, name: String, modifier: Modifier = Modifier) {
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().padding(top = 16.dp),
 //        verticalArrangement = Arrangement.Center,
 //        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
 
         LazyColumn {
             items(20) {

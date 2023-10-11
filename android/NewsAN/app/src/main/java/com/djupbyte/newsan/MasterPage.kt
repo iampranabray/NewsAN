@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
@@ -42,6 +43,7 @@ import com.example.anNews.component.ANTopAppBar
     ExperimentalComposeUiApi::class,
 )
 @Composable
+@ExperimentalMaterial3Api
 fun MasterPage(
 
     modifier: Modifier = Modifier) {
@@ -85,7 +87,15 @@ fun MasterPage(
                 },
 
                 contentColor = MaterialTheme.colorScheme.onBackground,
-                //topBar = { TopAppBar(title = { Text("$name") }) },
+//                topBar = { TopAppBar(
+//                    colors = TopAppBarDefaults.topAppBarColors(
+//                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+//                        titleContentColor = MaterialTheme.colorScheme.primary,
+//                    ),
+//                    title = {
+//                        Text("Small Top App Bar")
+//                    }
+//                ) },
                 contentWindowInsets = WindowInsets(0, 0, 0, 0),
                 containerColor = Color.Transparent,
 
@@ -132,7 +142,7 @@ fun MasterPage(
                         Modifier.fillMaxSize()
                     ) {
                         ANTopAppBar(
-                            text = "News1",
+                            text = "NewsAN",
                             onActionClick = { showSettingsDialog = true },
                             onNavigationIconClick = {},
                         )
