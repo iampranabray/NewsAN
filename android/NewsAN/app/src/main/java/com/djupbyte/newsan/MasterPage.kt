@@ -1,16 +1,17 @@
 
-import android.annotation.SuppressLint
+//import androidx.compose.material3.Scaffold
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
@@ -21,17 +22,29 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.navigation.compose.rememberNavController
 import com.djupbyte.newsan.BottomItems
+import com.djupbyte.newsan.features.SettingsDialog
 import com.example.anNews.NavigationGraph
 import com.example.anNews.component.ANTopAppBar
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
+
+//@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+//@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(
+
+    ExperimentalLayoutApi::class,
+    ExperimentalComposeUiApi::class,
+)
 @Composable
-fun MasterPage(modifier: Modifier = Modifier) {
+fun MasterPage(
+
+    modifier: Modifier = Modifier) {
 
     val navController = rememberNavController()
 
@@ -42,10 +55,10 @@ fun MasterPage(modifier: Modifier = Modifier) {
         mutableStateOf(false)
     }
 
-//    var settingViewModel = viewModel<SettingViewModel>(
+//    var settingViewModel = viewModel<com.djupbyte.newsan.features.SettingViewModel>(
 //        factory = object : ViewModelProvider.Factory {
 //            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//                return SettingViewModel(userDataRepository = ) as T
+//                return com.djupbyte.newsan.features.SettingViewModel(userDataRepository = ) as T
 //            }
 //        }
 //    );
@@ -61,11 +74,15 @@ fun MasterPage(modifier: Modifier = Modifier) {
             if (showSettingsDialog) {
                 SettingsDialog(
                     onDismiss = {
-                       // showSettingsDialog = false
+                        //settingViewModel.settingsUiState
+                        showSettingsDialog =  false
                     }
                 )
             }
             Scaffold(
+                modifier = Modifier.semantics {
+                    testTagsAsResourceId = true
+                },
 
                 contentColor = MaterialTheme.colorScheme.onBackground,
                 //topBar = { TopAppBar(title = { Text("$name") }) },
@@ -102,6 +119,7 @@ fun MasterPage(modifier: Modifier = Modifier) {
                 Row(
                     Modifier
                         .fillMaxSize()
+                        .consumeWindowInsets(padding)
                         .padding(padding)
                         .windowInsetsPadding(
                             WindowInsets.safeDrawing.only(

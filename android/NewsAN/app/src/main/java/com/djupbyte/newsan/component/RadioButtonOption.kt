@@ -1,3 +1,5 @@
+package com.djupbyte.newsan.component
+
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.selection.selectable

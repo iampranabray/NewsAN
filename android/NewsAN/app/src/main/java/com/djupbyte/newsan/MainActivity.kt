@@ -5,46 +5,58 @@ import MasterPage
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.view.WindowCompat
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.compose.rememberNavController
+import com.djupbyte.newsan.features.DarkThemeConfig
+import com.djupbyte.newsan.features.SettingUiState
+import com.djupbyte.newsan.features.SettingViewModel
 import com.example.anNews.ui.theme.PRTheme
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 //    private val viewModel by viewModels<MainActivityViewModel>(
 //
 //    )
 
+    private val settingViewModel: SettingViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        //WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        var uiState : SettingUiState by mutableStateOf(SettingUiState.Loading)
+
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                settingViewModel.settingsUiState
+                    .onEach {
+                        uiState = it
+                    }
+                    .collect()
+
+            }
+        }
+
         setContent {
+            val darkTheme = shouldUseDarkTheme(uiState)
 
-            val viewModel =
-                viewModel<MainActivityViewModel>(
-
-//                    factory = object : ViewModelProvider.Factory {
-//                    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//                        return MainActivityViewModel(str = "Hello") as T
-//                    }
-//                    }
-                )
-
-            val darkViewModel by viewModel.darkThemeSF.collectAsState()
             PRTheme(
-                darkTheme = darkViewModel
-                //viewModel.darkTheme
+                darkTheme = darkTheme
             ) {
 
                 MasterPage()
@@ -53,43 +65,60 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
-
-
-@HiltViewModel
-class MainActivityViewModel @Inject constructor(
-
-) : ViewModel() {
-
-    /// stateFlow
-    private val _darkTheme = MutableStateFlow(false)
-    val darkThemeSF = _darkTheme.asStateFlow()
-
-    ///compose state
-    var darkTheme by mutableStateOf(false)
-        private set
-
-    fun changeThemeByComposeState() {
-        ///compose state
-        darkTheme = !darkTheme
-    }
-
-    fun changeThemeByStateFlow() {
-        /// stateFlow
-        _darkTheme.value = !_darkTheme.value
+@Composable
+private fun shouldUseDarkTheme(
+    counterModel: SettingUiState
+): Boolean = when (counterModel) {
+    SettingUiState.Loading -> isSystemInDarkTheme()
+    is SettingUiState.Success -> when(counterModel.settings.darkThemeConfig){
+        DarkThemeConfig.FOLLOW_SYSTEM->isSystemInDarkTheme()
+        DarkThemeConfig.LIGHT -> false
+        DarkThemeConfig.DARK -> true
     }
 }
 
 
+//@HiltViewModel
+//class MainActivityViewModel @Inject constructor(
+//
+//) : ViewModel() {
+//
+//    /// stateFlow
+//    private val _darkTheme = MutableStateFlow(false)
+//    val darkThemeSF = _darkTheme.asStateFlow()
+//
+//    ///compose state
+//    var darkTheme by mutableStateOf(false)
+//        private set
+//
+//    fun changeThemeByComposeState() {
+//        ///compose state
+//        darkTheme = !darkTheme
+//    }
+//
+//    fun changeThemeByStateFlow() {
+//        /// stateFlow
+//        _darkTheme.value = !_darkTheme.value
+//    }
+//}
 
 
-
+//
+//            val viewModel =
+//                viewModel<MainActivityViewModel>(
+//
+////                    factory = object : ViewModelProvider.Factory {
+////                    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+////                        return MainActivityViewModel(str = "Hello") as T
+////                    }
+////                    }
+//                )
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     PRTheme {
         val navController = rememberNavController()
-        MasterPage()
+          //  MasterPage()
     }
 }
