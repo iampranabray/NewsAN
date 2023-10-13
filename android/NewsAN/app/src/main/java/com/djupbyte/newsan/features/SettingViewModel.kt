@@ -21,7 +21,7 @@ class SettingViewModel @Inject constructor(
             .map { userData ->
                 SettingUiState.Success(
                     settings = UserEditableSettings(
-//                        brand = userData.themeBrand,
+                        brand = userData.themeBrand,
 //                        useDynamicColor = userData.useDynamicColor,
                         darkThemeConfig = userData.darkThemeConfig
                     )
@@ -32,11 +32,11 @@ class SettingViewModel @Inject constructor(
                 started = SharingStarted.Eagerly,
                 initialValue = SettingUiState.Loading
             )
-//    fun updateThemeBrand(themeBrand: ThemeBrand){
-//        viewModelScope.launch {
-//            userDataRepository.setThemeBrand(themeBrand)
-//        }
-//    }
+    fun updateThemeBrand(themeBrand: ThemeBrand){
+        viewModelScope.launch {
+            userDataRepository.setThemeBrand(themeBrand)
+        }
+    }
     fun updateDarkThemeConfig(darkThemeConfig: DarkThemeConfig){
         viewModelScope.launch {
             userDataRepository.setDarkThemeConfig(darkThemeConfig)
@@ -52,7 +52,7 @@ class SettingViewModel @Inject constructor(
 }
 
 data class UserEditableSettings(
-//    val brand: ThemeBrand,
+    val brand: ThemeBrand,
 //    val useDynamicColor: Boolean,
     val darkThemeConfig: DarkThemeConfig
 

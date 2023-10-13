@@ -22,6 +22,7 @@ import androidx.navigation.compose.rememberNavController
 import com.djupbyte.newsan.features.DarkThemeConfig
 import com.djupbyte.newsan.features.SettingUiState
 import com.djupbyte.newsan.features.SettingViewModel
+import com.djupbyte.newsan.features.ThemeBrand
 import com.example.anNews.ui.theme.PRTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -60,7 +61,8 @@ class MainActivity : ComponentActivity() {
             val darkTheme = shouldUseDarkTheme(uiState)
 
             PRTheme(
-                darkTheme = darkTheme
+                darkTheme = darkTheme,
+                androidTheme= shouldUseAndroidTheme(uiState)
             ) {
 
                 MasterPage()
@@ -78,6 +80,17 @@ private fun shouldUseDarkTheme(
         DarkThemeConfig.FOLLOW_SYSTEM->isSystemInDarkTheme()
         DarkThemeConfig.LIGHT -> false
         DarkThemeConfig.DARK -> true
+    }
+}
+
+@Composable
+private fun shouldUseAndroidTheme(
+    uiState: SettingUiState,
+): Boolean = when (uiState) {
+    SettingUiState.Loading -> false
+    is SettingUiState.Success -> when (uiState.settings.brand) {
+        ThemeBrand.DEFAULT -> false
+        ThemeBrand.ANDROID -> true
     }
 }
 

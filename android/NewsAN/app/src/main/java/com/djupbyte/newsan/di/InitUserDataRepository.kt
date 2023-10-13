@@ -1,6 +1,7 @@
 package com.djupbyte.newsan.di
 
 import com.djupbyte.newsan.features.DarkThemeConfig
+import com.djupbyte.newsan.features.ThemeBrand
 import com.djupbyte.newsan.repository.UserData
 import com.djupbyte.newsan.repository.UserDataRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +15,7 @@ class InitUserDataRepository() : UserDataRepository {
 //     followedTopics=,
 //     themeBrand=,
         darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
+        themeBrand = ThemeBrand.ANDROID
 //     useDynamicColor=,
 //     shouldHideOnboarding=,
     ))
@@ -22,9 +24,9 @@ class InitUserDataRepository() : UserDataRepository {
     override var userData: StateFlow<UserData> = setDarkTheme
 
 
-//    override suspend fun setThemeBrand(themeBrand: ThemeBrand) {
-//        //dataSource.setThemeBrand(themeBrand)
-//    }
+    override suspend fun setThemeBrand(themeBrand: ThemeBrand) {
+        _setDarkTheme.value = _setDarkTheme.value.copy(themeBrand=themeBrand)
+    }
 
     override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
         _setDarkTheme.value = _setDarkTheme.value.copy(darkThemeConfig=darkThemeConfig)

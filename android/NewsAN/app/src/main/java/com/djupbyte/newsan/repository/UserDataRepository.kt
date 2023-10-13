@@ -1,5 +1,6 @@
 package com.djupbyte.newsan.repository
 import com.djupbyte.newsan.features.DarkThemeConfig
+import com.djupbyte.newsan.features.ThemeBrand
 import kotlinx.coroutines.flow.Flow
 
 interface UserDataRepository{
@@ -7,7 +8,7 @@ interface UserDataRepository{
     /**
      * Sets the desired theme brand.
      */
-    //suspend fun setThemeBrand(themeBrand: ThemeBrand)
+    suspend fun setThemeBrand(themeBrand: ThemeBrand)
 
     /**
      * Sets the desired dark theme config.
@@ -20,7 +21,7 @@ data class UserData(
 //    val bookmarkedNewsResources: Set<String>,
 //    val viewedNewsResources: Set<String>,
 //    val followedTopics: Set<String>,
-//    val themeBrand: ThemeBrand,
+    val themeBrand: ThemeBrand,
     val darkThemeConfig: DarkThemeConfig,
 //    val useDynamicColor: Boolean,
 //    val shouldHideOnboarding: Boolean,

@@ -39,7 +39,7 @@ fun SettingsDialog(
     val settingsUiState by viewModel.settingsUiState.collectAsStateWithLifecycle()
     SettingsDialog(
         settingsUiState = settingsUiState,
-        //onChangeThemeBrand = viewModel::updateThemeBrand,
+        onChangeThemeBrand = viewModel::updateThemeBrand,
         onChangeDarkThemeConfig = viewModel::updateDarkThemeConfig,
         onDismiss = onDismiss
     )
@@ -50,7 +50,7 @@ fun SettingsDialog(
 @Composable
 private fun SettingsDialog(
     settingsUiState: SettingUiState,
-    //onChangeThemeBrand: (themeBrand: ThemeBrand) -> Unit,
+    onChangeThemeBrand: (themeBrand: ThemeBrand) -> Unit,
     onChangeDarkThemeConfig: (darkThemeConfig: DarkThemeConfig) -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -78,7 +78,7 @@ private fun SettingsDialog(
 
                     is SettingUiState.Success -> {
                         SettingsPanel(
-                            //onChangeThemeBrand = onChangeThemeBrand,
+                            onChangeThemeBrand = onChangeThemeBrand,
                             onChangeDarkThemeConfig = onChangeDarkThemeConfig,
                             settings = settingsUiState.settings
                             //viewModel::
@@ -111,7 +111,7 @@ private fun SettingsDialog(
 
 @Composable
 private fun SettingsPanel(
-   // onChangeThemeBrand: (themeBrand: ThemeBrand) -> Unit,
+    onChangeThemeBrand: (themeBrand: ThemeBrand) -> Unit,
     onChangeDarkThemeConfig: (darkThemeConfig: DarkThemeConfig) -> Unit,
     settings: UserEditableSettings
     //com.djupbyte.newsan.features.UserEditableSettings
@@ -136,19 +136,17 @@ private fun SettingsPanel(
 
         RadioButtonOption(
             text = "Default",
-            isSelected = true,
-            //settings.brand == ThemeBrand.DEFAULT,
+            isSelected = settings.brand == ThemeBrand.DEFAULT,
             onOptionSelected = {
-               //// onChangeThemeBrand(ThemeBrand.DEFAULT)
+                onChangeThemeBrand(ThemeBrand.DEFAULT)
                 // selectedOption = com.djupbyte.newsan.features.ThemeBrand.DEFAULT
             })
 
         RadioButtonOption(
             text = "Android",
-            isSelected = true,
-            //settings.brand == ThemeBrand.ANDROID,
+            isSelected = settings.brand == ThemeBrand.ANDROID,
             onOptionSelected = {
-               //// onChangeThemeBrand(ThemeBrand.ANDROID)
+                onChangeThemeBrand(ThemeBrand.ANDROID)
                 //selectedOption = com.djupbyte.newsan.features.ThemeBrand.ANDROID
                 //viewModel.changeTheme()
             })
@@ -171,7 +169,7 @@ private fun SettingsPanel(
             isSelected = true,
             //ThemeBrand.ANDROID == settings.brand,
             onOptionSelected = {
-               //// onChangeThemeBrand(ThemeBrand.ANDROID)
+                //// onChangeThemeBrand(ThemeBrand.ANDROID)
                 selectedOption = ThemeBrand.ANDROID
                 //viewModel.changeTheme()
             })
@@ -180,7 +178,7 @@ private fun SettingsPanel(
             isSelected = true,
             //ThemeBrand.ANDROID == settings.brand,
             onOptionSelected = {
-              ////  onChangeThemeBrand(ThemeBrand.ANDROID)
+                ////  onChangeThemeBrand(ThemeBrand.ANDROID)
                 selectedOption = ThemeBrand.ANDROID
                 //viewModel.changeTheme()
             })
