@@ -13,6 +13,12 @@ This open-source project aims to create a local news app for the Andaman & Nicob
 ## Screenshots
 <img src="/iOS/Screenshot.png"/> 
 
+<p align="left">
+<img src="/android/NewsAN/assets/screenshot1.jpeg" width="265" height="550"/> <img src="/android/NewsAN/assets/screenshot2.jpeg" width="265" height="550"/>
+   <img src="/android/NewsAN/assets/screenshot3.jpeg" width="265" height="550"/> <img src="/android/NewsAN/assets/screenshot4.jpeg" width="265" height="550"/>
+   <img src="/android/NewsAN/assets/screenshot5.jpeg" width="265" height="550"/>
+</p>
+
 ## Tech Stack
 
 - Backend: Firebase
