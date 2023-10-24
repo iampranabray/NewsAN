@@ -11,8 +11,10 @@ This open-source project aims to create a local news app for the Andaman & Nicob
 5. Receive push notifications for breaking news and important updates.
 
 ## Screenshots
+### iOS Screens
 <img src="/iOS/Screenshot.png"/> 
 
+### Android Screens
 <p align="left">
 <img src="/android/NewsAN/assets/screenshot1.jpeg" width="265" height="550"/> <img src="/android/NewsAN/assets/screenshot2.jpeg" width="265" height="550"/>
    <img src="/android/NewsAN/assets/screenshot3.jpeg" width="265" height="550"/> <img src="/android/NewsAN/assets/screenshot4.jpeg" width="265" height="550"/>
