@@ -147,42 +147,42 @@ private fun SettingsPanel(
             isSelected = settings.brand == ThemeBrand.ANDROID,
             onOptionSelected = {
                 onChangeThemeBrand(ThemeBrand.ANDROID)
-                //selectedOption = com.djupbyte.newsan.features.ThemeBrand.ANDROID
+
                 //viewModel.changeTheme()
             })
 
 
     }
-    Text(
-        "Use Dynamic Color",
-        style = MaterialTheme.typography.titleMedium.copy(
-            fontWeight = FontWeight.Bold
-        )
-    )
-    Column(
-        Modifier
-
-            .selectableGroup()
-    ) {
-        RadioButtonOption(
-            text = "Yes",
-            isSelected = true,
-            //ThemeBrand.ANDROID == settings.brand,
-            onOptionSelected = {
-                //// onChangeThemeBrand(ThemeBrand.ANDROID)
-                selectedOption = ThemeBrand.ANDROID
-                //viewModel.changeTheme()
-            })
-        RadioButtonOption(
-            text = "No",
-            isSelected = true,
-            //ThemeBrand.ANDROID == settings.brand,
-            onOptionSelected = {
-                ////  onChangeThemeBrand(ThemeBrand.ANDROID)
-                selectedOption = ThemeBrand.ANDROID
-                //viewModel.changeTheme()
-            })
-    }
+//    Text(
+//        "Use Dynamic Color",
+//        style = MaterialTheme.typography.titleMedium.copy(
+//            fontWeight = FontWeight.Bold
+//        )
+//    )
+//    Column(
+//        Modifier
+//
+//            .selectableGroup()
+//    ) {
+//        RadioButtonOption(
+//            text = "Yes",
+//            isSelected = true,
+//            //ThemeBrand.ANDROID == settings.brand,
+//            onOptionSelected = {
+//                //// onChangeThemeBrand(ThemeBrand.ANDROID)
+//                selectedOption = ThemeBrand.ANDROID
+//                //viewModel.changeTheme()
+//            })
+//        RadioButtonOption(
+//            text = "No",
+//            isSelected = true,
+//            //ThemeBrand.ANDROID == settings.brand,
+//            onOptionSelected = {
+//                ////  onChangeThemeBrand(ThemeBrand.ANDROID)
+//                selectedOption = ThemeBrand.ANDROID
+//                //viewModel.changeTheme()
+//            })
+//    }
     Text(
         "Dark Mode Preference",
         style = MaterialTheme.typography.titleMedium.copy(
@@ -197,7 +197,7 @@ private fun SettingsPanel(
             isSelected = DarkThemeConfig.FOLLOW_SYSTEM == settings.darkThemeConfig,
             onOptionSelected = {
                 onChangeDarkThemeConfig(DarkThemeConfig.FOLLOW_SYSTEM)
-                //darkThemeConfig = com.djupbyte.newsan.features.DarkThemeConfig.FOLLOW_SYSTEM
+
                 //viewModel.changeTheme()
             })
         RadioButtonOption(
@@ -205,8 +205,7 @@ private fun SettingsPanel(
             isSelected = DarkThemeConfig.LIGHT == settings.darkThemeConfig,
             onOptionSelected = {
                 onChangeDarkThemeConfig(DarkThemeConfig.LIGHT)
-                //darkThemeConfig = com.djupbyte.newsan.features.DarkThemeConfig.LIGHT
-                //viewModel.changeTheme()
+
             })
         RadioButtonOption(
             text = "Dark",
@@ -214,7 +213,7 @@ private fun SettingsPanel(
             onOptionSelected = {
 
                 onChangeDarkThemeConfig(DarkThemeConfig.DARK)
-                //darkThemeConfig = com.djupbyte.newsan.features.DarkThemeConfig.DARK
+
 
                 //viewModel.changeThemeByStateFlow()
             })

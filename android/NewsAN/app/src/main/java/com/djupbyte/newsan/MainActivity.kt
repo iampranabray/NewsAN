@@ -39,8 +39,10 @@ class MainActivity : ComponentActivity() {
 
     private val settingViewModel: SettingViewModel by viewModels()
 
+
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
+       // val splashScreen = installSplashScreen()
 
         super.onCreate(savedInstanceState)
         var uiState : SettingUiState by mutableStateOf(SettingUiState.Loading)
@@ -58,14 +60,17 @@ class MainActivity : ComponentActivity() {
         //transparent
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
+            val navController = rememberNavController()
             val darkTheme = shouldUseDarkTheme(uiState)
+
 
             PRTheme(
                 darkTheme = darkTheme,
                 androidTheme= shouldUseAndroidTheme(uiState)
             ) {
+                //NavigationGraph()
 
-                MasterPage()
+               MasterPage(darkTheme=darkTheme)
             }
         }
     }

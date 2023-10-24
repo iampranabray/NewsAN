@@ -6,8 +6,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -16,14 +19,31 @@ fun ANTopAppBar(
     onNavigationIconClick: () -> Unit,
     text: String,
 ) {
-    CenterAlignedTopAppBar(
-        title = { Text(text = text,fontWeight= FontWeight.Bold) },
+//    Image(
+//        painter = painterResource(id = R.drawable.blob), contentDescription = "",
+//        //contentScale = ContentScale.FillBounds,
+//        modifier = Modifier
+//            .blur(
+//                radiusX = 10.dp,
+//                radiusY = 10.dp,
+//                edgeTreatment = BlurredEdgeTreatment(RoundedCornerShape(8.dp))
+//            )
+//            .offset(
+//                y = -100.dp,)
+//
+//    )
 
-//        colors =
-//        TopAppBarDefaults.centerAlignedTopAppBarColors(
-//            //containerColor = MaterialTheme.colorScheme.background
-//        ),
+    CenterAlignedTopAppBar(
+//        modifier = Modifier.background(),
+
+        title = { Text(text = text, fontWeight = FontWeight.Bold) },
+        colors =
+        TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = Color.Transparent
+        ),
+
         actions = {
+
             IconButton(onClick = onActionClick) {
                 Icon(
                     imageVector = NiaIcons.Settings,

@@ -85,6 +85,7 @@ fun PRGradientBackground(
             Modifier
                 .fillMaxSize()
                 .drawWithCache {
+
                     // Compute the start and end coordinates such that the gradients are angled 11.06
                     // degrees off the vertical axis
                     val offset = size.height * tan(

@@ -18,11 +18,12 @@ interface UserDataRepository{
 }
 
 data class UserData(
+    val themeBrand: ThemeBrand,
+    val darkThemeConfig: DarkThemeConfig,
+   // val currentDestination: NavDestination
 //    val bookmarkedNewsResources: Set<String>,
 //    val viewedNewsResources: Set<String>,
 //    val followedTopics: Set<String>,
-    val themeBrand: ThemeBrand,
-    val darkThemeConfig: DarkThemeConfig,
 //    val useDynamicColor: Boolean,
 //    val shouldHideOnboarding: Boolean,
 )

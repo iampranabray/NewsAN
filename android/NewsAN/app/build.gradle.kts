@@ -115,4 +115,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     //implementation ("com.github.barteksc:android-pdf-viewer:2.8.2")
     //implementation("io.coil-kt:2.2.2")
+
+    implementation ("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
+
+    implementation("androidx.core:core-splashscreen:1.0.0")
 }

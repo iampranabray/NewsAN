@@ -10,24 +10,22 @@ import kotlinx.coroutines.flow.StateFlow
 class InitUserDataRepository() : UserDataRepository {
 
     private val _setDarkTheme = MutableStateFlow<UserData>(UserData(
-//     bookmarkedNewsResources= ,
+        darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
+        themeBrand = ThemeBrand.ANDROID,
+               // currentDestination =
+    //     bookmarkedNewsResources= ,
 //     viewedNewsResources = ,
 //     followedTopics=,
 //     themeBrand=,
-        darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
-        themeBrand = ThemeBrand.ANDROID
 //     useDynamicColor=,
 //     shouldHideOnboarding=,
     ))
     private var setDarkTheme: StateFlow<UserData> = _setDarkTheme
 
     override var userData: StateFlow<UserData> = setDarkTheme
-
-
     override suspend fun setThemeBrand(themeBrand: ThemeBrand) {
         _setDarkTheme.value = _setDarkTheme.value.copy(themeBrand=themeBrand)
     }
-
     override suspend fun setDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {
         _setDarkTheme.value = _setDarkTheme.value.copy(darkThemeConfig=darkThemeConfig)
     }

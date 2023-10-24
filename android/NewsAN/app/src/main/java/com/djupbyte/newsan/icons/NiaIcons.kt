@@ -18,6 +18,7 @@ import androidx.compose.material.icons.rounded.Newspaper
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material.icons.rounded.ShortText
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material.icons.rounded.StarOutline
@@ -48,4 +49,6 @@ object NiaIcons{
     val StarOutline = Icons.Rounded.StarOutline
     val Info = Icons.Rounded.Info
     val Feedback = Icons.Rounded.Feedback
+    val Share = Icons.Rounded.Share
+
 }
